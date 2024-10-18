@@ -10,18 +10,18 @@ similarity = pickle.load(open('similarity.pkl', mode='rb'))
 # Function to recommend a movie
 def recommend(movie):
     recommend = []
-    movie_index = movies[movies['title'] == movie].index[0]  # Adjust 'title' to the actual column name
+    movie_index = movies[movies['title'] == movie].index[0]
     distance = similarity[movie_index]
     movie_list = sorted(list(enumerate(distance)), reverse=True, key=lambda x: x[1])[1:6]
 
     for i in movie_list:
-        recommend.append(movies.iloc[i[0]]['title'])  # Adjust 'title' to the actual column name
+        recommend.append(movies.iloc[i[0]]['title'])  
 
     return recommend
 
 # STREAMLIT Web-App
 st.title('Movie Recommendation System')
-selected_movie = st.selectbox("Select a movie to get some recommendations :", movies['title'].values)  # Adjust 'title'
+selected_movie = st.selectbox("Select a movie to get some recommendations :", movies['title'].values)  
 btn = st.button('Recommend')
 
 if btn:
